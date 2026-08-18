@@ -1,7 +1,6 @@
 # fast-collections
 
-[![Docs](https://img.shields.io/badge/docs-mkdocs-blue)](https://github.com/Fast-Python/fast-collections/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![Fast Python](https://img.shields.io/badge/fast-python-red?labelColor=black&style=flat-square)
 [![test](https://github.com/Fast-Python/fast-collections/actions/workflows/test.yml/badge.svg)](https://github.com/Fast-Python/fast-collections/actions/workflows/test.yml)
 [![GitHub stars](https://img.shields.io/github/stars/Fast-Python/fast-collections?style=social)](https://github.com/Fast-Python/fast-collections/)
 [![Python Version](https://img.shields.io/pypi/pyversions/fast-collections.svg)](https://pypi.org/project/fast-collections/)
