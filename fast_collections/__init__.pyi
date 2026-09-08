@@ -22,7 +22,6 @@ class Trie:
 
     def __init__(self) -> None:
         """Initialize an empty trie."""
-        ...
 
     def insert(self, word: str) -> None:
         """
@@ -45,7 +44,6 @@ class Trie:
             >>> "hello" in t
             True
         """
-        ...
 
     def search(self, word: str) -> bool:
         """
@@ -70,7 +68,6 @@ class Trie:
             >>> t.search("app")
             False
         """
-        ...
 
     def starts_with(self, prefix: str) -> bool:
         """
@@ -95,7 +92,6 @@ class Trie:
             >>> t.starts_with("app")
             True
         """
-        ...
 
     def delete(self, word: str) -> bool:
         """
@@ -123,7 +119,6 @@ class Trie:
             >>> t.delete("apple")
             True
         """
-        ...
 
     def word_count(self) -> int:
         """
@@ -140,7 +135,6 @@ class Trie:
             >>> t.word_count()
             1
         """
-        ...
 
     def collect_words(self) -> list[str]:
         """
@@ -163,7 +157,6 @@ class Trie:
             >>> t.collect_words()
             ['apple', 'banana']
         """
-        ...
 
     def __contains__(self, word: str) -> bool:
         """
@@ -179,7 +172,6 @@ class Trie:
             >>> "app" in t
             False
         """
-        ...
 
     def __len__(self) -> int:
         """
@@ -194,4 +186,3 @@ class Trie:
             >>> len(t)
             2
         """
-        ...
