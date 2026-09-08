@@ -88,7 +88,7 @@ Checks if a word has been inserted into the trie.
 t = Trie()
 t.insert("apple")
 assert t.search("apple") == True
-assert t.search("app")   == False
+assert t.search("app") == False
 ```
 
 ---
@@ -111,7 +111,7 @@ Checks if any inserted word starts with the given prefix.
 t = Trie()
 t.insert("apple")
 t.insert("application")
-assert t.starts_with("app")  == True
+assert t.starts_with("app") == True
 assert t.starts_with("appl") == True
 assert t.starts_with("banana") == False
 assert t.starts_with("") == True
@@ -140,7 +140,7 @@ t.insert("app")
 
 assert t.delete("apple") == True
 assert t.delete("apple") == False
-assert t.search("app")   == True
+assert t.search("app") == True
 ```
 
 ---

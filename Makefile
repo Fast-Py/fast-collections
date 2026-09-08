@@ -13,8 +13,8 @@ test-cargo:
 	cargo test --release
 
 format:
+	$(UV) run ruff check --fix
 	$(UV) run ruff format
-	$(UV) run ruff check
 
 lint:
 	$(UV) run ruff check --exit-non-zero-on-fix
