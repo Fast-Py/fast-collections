@@ -19,6 +19,7 @@ format:
 lint:
 	$(UV) run ruff check --exit-non-zero-on-fix
 	$(UV) run ruff format --check --diff
+	$(UV) run flake8 tests fast_collections
 
 build:
 	$(UV) run maturin build --release
