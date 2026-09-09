@@ -94,7 +94,11 @@ impl Triers {
         result
     }
 
-    fn collect_rec(node: &Triers, prefix: &mut String, result: &mut Vec<String>) {
+    fn collect_rec(
+        node: &Triers,
+        prefix: &mut String,
+        result: &mut Vec<String>,
+    ) {
         if node.is_end {
             result.push(prefix.clone());
         }
@@ -103,6 +107,89 @@ impl Triers {
             Self::collect_rec(child, prefix, result);
             prefix.pop();
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rstest::rstest;
+
+    #[rstest]
+    #[case("hello", "hello", true)]
+    #[case("case", "cast", false)]
+    #[case("cat", "cat", true)]
+    #[case("card", "capt", false)]
+    #[case("some_word", "", false)]
+    fn search_checks(
+        #[case] word_to_insert: &str,
+        #[case] word: &str,
+        #[case] expected: bool,
+    ) {
+        let mut t = Triers::new();
+        t.insert(word_to_insert);
+        assert_eq!(t.search(word), expected);
+    }
+
+    #[rstest]
+    #[case("hello", "h", true)]
+    #[case("case", "cast", false)]
+    #[case("cat", "at", false)]
+    #[case("pinned", "pinn", true)]
+    #[case("pinned", "", true)]
+
+    fn start_with_checks(
+        #[case] word_to_insert: &str,
+        #[case] prefix: &str,
+        #[case] expected: bool,
+    ) {
+        let mut t = Triers::new();
+        t.insert(word_to_insert);
+        assert_eq!(t.starts_with(prefix), expected);
+    }
+
+    #[rstest]
+    #[case("hello", "world", false)]
+    #[case("cup", "cup", true)]
+    #[case("", "", true)]
+    #[case("map", "mat", false)]
+    fn delete_checks(
+        #[case] word_to_insert: &str,
+        #[case] word_to_delete: &str,
+        #[case] expected: bool,
+    ) {
+        let mut t = Triers::new();
+        t.insert(word_to_insert);
+        assert_eq!(t.delete(word_to_delete), expected);
+    }
+
+    #[rstest]
+    #[case(&["hi", "honey"], 2)]
+    #[case(&["default"], 1)]
+    #[case(&[], 0)]
+    fn word_count_checks(#[case] words: &[&str], #[case] expected_count: u32) {
+        let mut t = Triers::new();
+        for word in words {
+            t.insert(word);
+        }
+        assert!(t.word_count() as u32 == expected_count);
+    }
+
+    #[rstest]
+    #[case(vec!["hi".to_string(), "honey".to_string()], vec!["hi".to_string(), "honey".to_string()], true)]
+    #[case(vec!["we love".to_string(), "python".to_string()], vec!["python".to_string()], false)]
+    fn collect_word_checks(
+        #[case] words: Vec<String>,
+        #[case] expected_words: Vec<String>,
+        #[case] expected: bool,
+    ) {
+        let mut t = Triers::new();
+        for word in words {
+            t.insert(&word);
+        }
+        let mut res: Vec<String> = t.collect_words();
+        res.sort();
+        assert_eq!(res == expected_words, expected);
     }
 }
 

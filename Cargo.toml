@@ -14,3 +14,6 @@ pyo3 = { version = "0.28", features = ["extension-module"], optional = true }
 [lib]
 name = "fast_collections" 
 crate-type = ["cdylib"]
+
+[dev-dependencies]
+rstest = "0.27"

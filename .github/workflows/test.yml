@@ -70,3 +70,4 @@ jobs:
         run: |
           uv sync
           make test
+          cargo test
