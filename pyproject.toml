@@ -23,12 +23,14 @@ classifiers = [
     "Programming Language :: Rust",
     "Operating System :: OS Independent",
 ]
+
 [dependency-groups]
 dev = [
     "maturin>=1.14.1",
     "pytest>=8.3.5",
     "ruff>=0.15.22",
     "wemake-python-styleguide>=0.17.0",
+    "mypy>=1.14.1",
 ]
 docs = [
     "mkdocs>=1.6.1",

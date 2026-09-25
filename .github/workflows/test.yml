@@ -71,3 +71,6 @@ jobs:
           uv sync
           make test
           cargo test
+
+      - name: lint
+        run: make lint
