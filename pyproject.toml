@@ -2,7 +2,7 @@
 name = "fast-collections"
 version = "0.0.1"
 description = "Blazing-fast collections you've been missing"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [
