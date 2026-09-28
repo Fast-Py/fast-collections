@@ -70,4 +70,5 @@ jobs:
         run: |
           uv sync
           make test
+          make typing
           cargo test
