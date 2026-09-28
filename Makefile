@@ -1,4 +1,4 @@
-.PHONY: all build develop test fmt lint clean clean-cargo check
+.PHONY: all build develop test fmt lint typing clean clean-cargo check
 UV ?= uv
 
 all: develop
@@ -20,6 +20,9 @@ lint:
 	$(UV) run ruff check --exit-non-zero-on-fix
 	$(UV) run ruff format --check --diff
 	$(UV) run flake8 tests fast_collections
+
+typing:
+	$(UV) run mypy --strict fast_collections tests
 
 build:
 	$(UV) run maturin build --release

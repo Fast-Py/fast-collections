@@ -4,5 +4,5 @@ from fast_collections import Trie
 
 
 @pytest.fixture
-def trie():
+def trie() -> Trie:
     return Trie()
