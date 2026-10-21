@@ -50,4 +50,4 @@ jobs:
         uses: CodSpeedHQ/action@v5
         with:
           mode: simulation
-          run: uv run pytest benchmarks/trie --codspeed
+          run: uv run pytest benchmarks --codspeed -o "python_files=test_*.py bench_*.py"

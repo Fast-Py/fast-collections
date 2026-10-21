@@ -30,8 +30,12 @@ uv run python benchmarks/trie/data/generate.py
 ```bash
 uv sync --group bench
 uv run maturin develop --release   # build the Rust extension
-uv run pytest benchmarks/trie --benchmark-only
+uv run pytest benchmarks/trie --benchmark-only -o "python_files=test_*.py bench_*.py"
 ```
+
+The `-o "python_files=test_*.py bench_*.py"` override makes pytest collect
+the `bench_*.py` files. It is not set globally so that regular unit-test
+runs (`make test`) do not pick up benchmarks.
 
 Useful pytest-benchmark flags:
 

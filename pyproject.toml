@@ -46,10 +46,7 @@ build-backend = "maturin"
 [tool.maturin]
 features = ["pyo3"]
 module-name = "fast_collections"
-include = ["fast_collections/"] 
-
-[tool.pytest.ini_options]
-python_files = ["test_*.py", "bench_*.py"]
+include = ["fast_collections/"]
 
 [tool.ruff]
 line-length = 80
