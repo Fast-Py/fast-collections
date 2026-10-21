@@ -1,6 +1,6 @@
 [package]
 name = "fast-collections"
-description = "Blazing-fast collections you've been missing"
+description = "Blazing-fast data structures written in Rust for Python."
 authors = ["khabib73 <kh73bb@yahoo.com>"]
 version = "0.0.1"
 edition = "2024"
