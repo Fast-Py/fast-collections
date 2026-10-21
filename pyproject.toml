@@ -24,6 +24,7 @@ classifiers = [
 [dependency-groups]
 bench = [
     "pytest-benchmark>=5.3.0",
+    "pytest-codspeed>=4.2.0",
 ]
 dev = [
     "maturin>=1.14.1",
@@ -46,6 +47,9 @@ build-backend = "maturin"
 features = ["pyo3"]
 module-name = "fast_collections"
 include = ["fast_collections/"] 
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py", "bench_*.py"]
 
 [tool.ruff]
 line-length = 80
