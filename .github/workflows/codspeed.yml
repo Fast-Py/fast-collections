@@ -16,10 +16,6 @@ on:
   # performance analysis in order to generate initial data.
   workflow_dispatch:
 
-permissions:
-  contents: read
-  id-token: write  # for OpenID Connect authentication with CodSpeed
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
@@ -49,5 +45,6 @@ jobs:
       - name: Run benchmarks
         uses: CodSpeedHQ/action@v5
         with:
+          token: ${{ secrets.CODSPEED_TOKEN }}
           mode: simulation
           run: uv run pytest benchmarks --codspeed -o "python_files=test_*.py bench_*.py"
