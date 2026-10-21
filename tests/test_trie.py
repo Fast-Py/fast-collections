@@ -79,10 +79,28 @@ def test_starts_with(
     assert trie.starts_with(prefix) is expected
 
 
-def test_delete(trie: Trie) -> None:
-    trie.insert("app")
-    trie.insert("apple")
+@pytest.mark.parametrize(
+    "words, to_delete, remaining",
+    [
+        (["app", "apple"], "apple", ["app"]),
+        (["app", "apple"], "app", ["apple"]),
+        (["hello", "world"], "hello", ["world"]),
+        (["hello"], "hello", []),
+        ([], "hello", []),
+        (["hello"], "world", ["hello"]),
+        (["", "a"], "", ["a"]),
+    ],
+)
+def test_delete(
+    trie: Trie, words: list[str], to_delete: str, remaining: list[str]
+) -> None:
+    "Test that deleting words updates the trie correctly."
+    _insert_all(trie, words)
 
-    assert trie.delete("apple")
-    assert not trie.search("apple")
-    assert trie.search("app")
+    assert trie.delete(to_delete) is (to_delete in words)
+    assert not trie.search(to_delete)
+
+    for word in remaining:
+        assert trie.search(word)
+
+    assert trie.word_count() == len(remaining)
