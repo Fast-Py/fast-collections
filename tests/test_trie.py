@@ -77,3 +77,12 @@ def test_starts_with(
 ) -> None:
     _insert_all(trie, words)
     assert trie.starts_with(prefix) is expected
+
+
+def test_delete(trie: Trie) -> None:
+    trie.insert("app")
+    trie.insert("apple")
+
+    assert trie.delete("apple")
+    assert not trie.search("apple")
+    assert trie.search("app")
