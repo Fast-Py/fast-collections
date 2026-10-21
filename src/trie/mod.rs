@@ -54,21 +54,29 @@ impl Triers {
     }
 
     pub fn delete(&mut self, word: &str) -> bool {
-        Self::delete_rec(self, word, 0)
+        let mut found: bool = false;
+        Self::delete_rec(self, word, 0, &mut found);
+        found
     }
 
-    fn delete_rec(node: &mut Triers, word: &str, depth: usize) -> bool {
+    fn delete_rec(
+        node: &mut Triers,
+        word: &str,
+        depth: usize,
+        found: &mut bool,
+    ) -> bool {
         if depth == word.len() {
             if !node.is_end {
                 return false;
             }
             node.is_end = false;
+            *found = true;
             return node.children.is_empty();
         }
 
         let ch = word[depth..].chars().next().unwrap();
         if let Some(child) = node.children.get_mut(&ch) {
-            if Self::delete_rec(child, word, depth + 1) {
+            if Self::delete_rec(child, word, depth + 1, found) {
                 node.children.remove(&ch);
                 return node.children.is_empty() && !node.is_end;
             }

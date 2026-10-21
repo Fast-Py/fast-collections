@@ -3,6 +3,7 @@ __pycache__/
 *$py.class
 .ruff_cache/
 .mypy_cache
+.benchmarks
 
 venv/
 env/

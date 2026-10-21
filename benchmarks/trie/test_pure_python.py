@@ -1,0 +1,101 @@
+"""Tests for the pure Python trie reference implementation.
+
+Mirrors ``tests/test_trie.py`` so that the pure Python implementation
+is verified against the same behavior as ``fast_collections.Trie``.
+
+TODO: these tests duplicate ``tests/test_trie.py``; later either remove
+them or parametrize the shared suite over both implementations.
+"""
+
+import pytest
+from pure_python import Trie
+
+
+@pytest.fixture
+def trie() -> Trie:
+    return Trie()
+
+
+def _insert_all(trie: Trie, words: list[str]) -> None:
+    for word in words:
+        trie.insert(word)
+
+
+@pytest.mark.parametrize(
+    "words",
+    [
+        [],
+        ["fast-collections"],
+        ["hi", "honey"],
+        ["", "abc", "def", "ghi"],
+    ],
+)
+def test_size_and_word_count(trie: Trie, words: list[str]) -> None:
+    "Test that the trie has the correct size and word count"
+    _insert_all(trie, words)
+    expected = len(set(words))
+    assert len(trie) == expected
+    assert trie.word_count() == expected
+
+
+@pytest.mark.parametrize(
+    "words, present, absent",
+    [
+        (
+            [
+                "hello",
+            ],
+            [
+                "hello",
+            ],
+            ["hello!"],
+        ),
+        ([], [], ["hello"]),
+        (
+            ["cat", "car", "cart"],
+            ["cat", "car", "cart"],
+            ["card", "cas", "cal"],
+        ),
+        (["programming", "program"], ["program", "programming"], ["programme"]),
+    ],
+)
+def test_contains(
+    trie: Trie, words: list[str], present: list[str], absent: list[str]
+) -> None:
+    "Test that the trie contains the correct words"
+    _insert_all(trie, words)
+
+    for word in present:
+        assert word in trie
+
+    for word in absent:
+        assert word not in trie
+        assert not trie.search(word)
+
+
+@pytest.mark.parametrize(
+    "words, prefix, expected",
+    [
+        (["abc"], "ab", True),
+        (["spaces"], "paces", False),
+        (["complexity"], "complex", True),
+        (["some_string"], "some_value", False),
+        (["foo", "bar"], "bar", True),
+        (["i", "love", "python"], "pyt", True),
+        (["i", "love", "python"], "foo", False),
+    ],
+)
+def test_starts_with(
+    trie: Trie, words: list[str], prefix: str, expected: bool
+) -> None:
+    _insert_all(trie, words)
+    assert trie.starts_with(prefix) is expected
+
+
+def test_delete(trie: Trie) -> None:
+    trie.insert("app")
+    trie.insert("apple")
+
+    assert trie.delete("apple")
+    assert not trie.search("apple")
+    assert trie.search("app")
