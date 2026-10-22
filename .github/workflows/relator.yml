@@ -1,0 +1,23 @@
+name: Relator
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  issues: read
+
+jobs:
+  notify:
+    name: "Telegram notification"
+    if: github.event.label.name == 'help wanted'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Send Telegram notification for new issue
+        uses: reagento/relator@879d895c8d7f44cfe7471bda4f5449c233e6f986 # v1.7.1
+        with:
+          tg-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          tg-chat-id: "@opensource_findings_python"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          custom-labels: "fast-collections"
